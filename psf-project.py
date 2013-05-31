@@ -18,5 +18,5 @@ if __name__ == '__main__':
     
     for record in query:
         fits_file =  os.path.join(record.Master.dir, record.Master.filename)
-        subprocess.call(['../img2xym_wfc3uv.e', '7', '10000', '999999', 
+        subprocess.call(['../img2psf_wfc3uv.e', '7', '10000', '59000', 
             '../PSFEFF_WFC3UV_F606W_C0.fits', 'QSEL', fits_file])

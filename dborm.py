@@ -44,7 +44,4 @@ class UVISFLT0(Base):
     '''
     __tablename__ = 'uvis_flt_0'
     __table_args__ = {'autoload':True}
-#    uvisflt0_id = Column('id', Integer)
-#    uvisflt0_id = relationship(Master, 
-#        primaryjoin = ('uvisflt0_id' == Master.id),
-#        backref='id')
+
