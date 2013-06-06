@@ -23,6 +23,8 @@ def loadConnection(connection_string):
     session = Session()
     return session, Base
 
+session, Base = loadConnection('sqlite:////grp/hst/wfc3a/Database/ql.db')
+
 #----------------------------------------------------------------------------
 # Define all the SQLAlchemy ORM bindings
 #----------------------------------------------------------------------------

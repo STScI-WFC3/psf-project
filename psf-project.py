@@ -5,15 +5,16 @@ import subprocess
 
 from dborm import Master
 from dborm import UVISFLT0
-from dborm import loadConnection
+from dborm import session
 
-session, Base = loadConnection('sqlite:////grp/hst/wfc3a/Database/ql.db')
+from sqlalchemy import cast
+from sqlalchemy import Real
 
 if __name__ == '__main__':
     query = session.query(UVISFLT0, Master)\
         .join(Master, Master.id == UVISFLT0.id)\
         .filter(UVISFLT0.FILTER == 'F606W')\
-        .filter(UVISFLT0.EXPTIME >= 400.0)\
+        .filter(cast(UVISFLT0.EXPTIME, Real) >= 400.0)\
         .filter(UVISFLT0.TARGNAME != 'DARK').all()        
     
     for record in query:
