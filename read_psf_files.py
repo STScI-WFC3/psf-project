@@ -27,7 +27,6 @@ def make_psf_dict():
                     psf['psf'] = psf['psf'].ravel()
     return psf
 
-
 def plot_psf(psf):
     '''
     Plot the psf in the dictionary.
@@ -38,18 +37,13 @@ def plot_psf(psf):
     p = ax.imshow(psf['psf'].reshape(11,11), interpolation='nearest')
     plt.colorbar(p)
     plt.show()
-                        
+
 def read_psf_files_main():
     '''
     Main controller for the read_psf_files module.
     '''
     for filename in glob.glob('../data/*.psf'):
         psf = make_psf_dict(filename)
-
-
-
-                        
-
 
 if __name__ == '__main__':
     read_psf_files_main()
