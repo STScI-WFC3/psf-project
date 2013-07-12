@@ -24,5 +24,5 @@ if __name__ == '__main__':
             '../PSFEFF_WFC3UV_F606W_C0.fits', 'QSEL', fits_file])
 
     pool = multiprocessing.Pool()
-	pool.map(subprocess.call, job_list)
-	pool.close()
+    pool.map(subprocess.call, job_list)
+    pool.close()
