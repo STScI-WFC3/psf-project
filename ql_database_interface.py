@@ -38,28 +38,25 @@ def get_settings():
     return data
 
 SETTINGS = get_settings()
+session, Base = loadConnection(SETTINGS[socket.gethostname()]['ql_connection_string'])
 
-# Import local PIL patch
-if socket.gethostname() == SETTINGS['production_machine']:
-    session, Base = loadConnection('sqlite:////grp/hst/wfc3a/Database/ql.db')
-
-    #----------------------------------------------------------------------------
-    # Define all the SQLAlchemy ORM bindings
-    #----------------------------------------------------------------------------
+#----------------------------------------------------------------------------
+# Define all the SQLAlchemy ORM bindings
+#----------------------------------------------------------------------------
 
 
-    class Master(Base):
-        '''
-        ORM for the master table.
-        '''
-        __tablename__ = 'master'
-        __table_args__ = {'autoload':True}
+class Master(Base):
+    '''
+    ORM for the master table.
+    '''
+    __tablename__ = 'master'
+    __table_args__ = {'autoload':True}
 
 
-    class UVISFLT0(Base):
-        '''
-        ORM for the uvis_flt_0 table.
-        '''
-        __tablename__ = 'uvis_flt_0'
-        __table_args__ = {'autoload':True}
+class UVISFLT0(Base):
+    '''
+    ORM for the uvis_flt_0 table.
+    '''
+    __tablename__ = 'uvis_flt_0'
+    __table_args__ = {'autoload':True}
 
