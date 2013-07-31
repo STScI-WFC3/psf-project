@@ -22,19 +22,21 @@ if __name__ == '__main__':
         .filter(cast(UVISFLT0.EXPTIME, REAL) >= 400.0)\
         .filter(UVISFLT0.TARGNAME != 'DARK').all()        
     
+    print len(query)
+
     job_list = []    
 
     for record in query:
         fits_file =  os.path.join(record.Master.dir, record.Master.filename)
         if record.UVISFLT0.FILTER in FILTER_LIST:
-            job_list.append(['/grp/hst/wfc3c/viana/psf/jays-code/img2psf_wfc3uv.e', 
+            job_list.append([os.path.join('/grp/hst/wfc3c/viana/psf/jays-code/', 
+                    SETTINGS[socket.gethostname()]['build'],
+                    'img2psf_wfc3uv.e'), 
                 '7', '10000', '59000', 
                 '/grp/hst/wfc3c/viana/psf/psf-models/PSFEFF_WFC3UV_{}_C0.fits'.format(record.UVISFLT0.FILTER), 
-                'QSEL', fits_file])
-            print job_list
-            import sys
-            sys.exit()
+                'QSEL', str(fits_file)]) 
 
+    print job_list[0]
 
     pool = multiprocessing.Pool(processes=SETTINGS[socket.gethostname()]['cores'])
     pool.map(subprocess.call, job_list)

@@ -4,8 +4,7 @@
 Contains all the SQLAlchemy database ORM definitions.
 '''
 
-import socket
-import yaml
+from settings import SETTINGS
 
 from sqlalchemy import create_engine
 from sqlalchemy import Column
@@ -13,7 +12,6 @@ from sqlalchemy import Integer
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm import relationship
-
 
 def loadConnection(connection_string, echo=False):
     '''
@@ -27,18 +25,7 @@ def loadConnection(connection_string, echo=False):
     session = Session()
     return session, Base
 
-
-def get_settings():
-    '''
-    Gets the setting information that we don't want burned into the 
-    repo.
-    '''
-    with open('config.yaml', 'r') as f:
-        data = yaml.load(f)
-    return data
-
-SETTINGS = get_settings()
-session, Base = loadConnection(SETTINGS[socket.gethostname()]['ql_connection_string'])
+session, Base = loadConnection(SETTINGS['ql_connection_string'])
 
 #----------------------------------------------------------------------------
 # Define all the SQLAlchemy ORM bindings
